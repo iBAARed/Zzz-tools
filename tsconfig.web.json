@@ -4,7 +4,8 @@
     "src/renderer/src/env.d.ts",
     "src/renderer/src/**/*",
     "src/renderer/src/**/*.vue",
-    "src/preload/*.d.ts"
+    "src/preload/*.d.ts",
+    "global.d.ts"
   ],
   "compilerOptions": {
     "composite": true,
@@ -12,7 +13,22 @@
     "paths": {
       "@renderer/*": [
         "src/renderer/src/*"
+      ],
+      "@main/*": [
+        "src/main/*"
       ]
-    }
-  }
+    },
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "lib": [
+      "esnext",
+      "dom"
+    ],
+    "jsx": "preserve",
+    "sourceMap": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+  },
 }

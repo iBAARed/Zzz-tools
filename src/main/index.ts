@@ -2,14 +2,18 @@ import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
+import Start from '@main/Start/Start'
 
 function createWindow(): void {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 900,
-    height: 670,
+    width: 1500,
+    height: 800,
     show: false,
     autoHideMenuBar: true,
+    // icon: path.join(__dirname, 'assets', 'icon.png'),
+    backgroundColor: '#202020',
+    titleBarStyle: 'hidden',
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
@@ -70,5 +74,14 @@ app.on('window-all-closed', () => {
   }
 })
 
+// 抛出所有方法
+ipcMain.handle('start-function', (_event /* 占位符，暂时不使用 */, methodName:string, ...args) => {
+  const method = Start[methodName];
+  if (Object.prototype.toString.call(method) === '[object Function]') {
+    return method(...args);
+  } else {
+    throw new Error(`Method ${methodName} not found on fileUtil`);
+  }
+});
 // In this file you can include the rest of your app"s specific main process
 // code. You can also put them in separate files and require them here.
