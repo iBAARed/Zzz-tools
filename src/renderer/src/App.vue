@@ -1,5 +1,5 @@
 <script setup lang="ts">
- import '@renderer/style/general.scss';
+ import '@renderer/style/global.scss';
 </script>
 
 <template>

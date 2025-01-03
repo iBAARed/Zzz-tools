@@ -9,7 +9,8 @@
   "compilerOptions": {
     "composite": true,
     "types": [
-      "electron-vite/node"
+      "electron-vite/node",
+      "node"
     ],
     "baseUrl": ".",
     "paths": {
@@ -19,6 +20,7 @@
       "@renderer/*": [
         "src/renderer/src/*"
       ],
-    }
+    },
+    "module": "ESNext"
   }
 }

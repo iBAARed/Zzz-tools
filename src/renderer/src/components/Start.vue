@@ -1,18 +1,21 @@
 <template>
   <div class="zzz-start-container background-plate">
-    <el-button @click="getImage">获取图片</el-button>
+    <el-carousel :interval="3000" type="card" height="350px">
+      <el-carousel-item v-for="(image, index) in startImageList" :key="index">
+        <el-image style="width: 100%; height: 100%" :src="image" fit="cover" />
+      </el-carousel-item>
+    </el-carousel>
   </div>
 </template>
 
 <script setup lang="ts">
-// console.log('start1',window)
+import { ref } from 'vue';
+const startImageList = ref<string[]>([]);
 
-const getImage = () => {
-  let dirInfo = window.startFunction.invoke('getStartImagePath')
-  console.log(dirInfo,'dir')
+const getStartImageList = async () => {
+  const images = await window.startFunction.invoke('getStartImagePath');
+  startImageList.value = images;
 }
+
+getStartImageList();
 </script>
-
-<style>
-
-</style>

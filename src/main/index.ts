@@ -3,6 +3,7 @@ import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 import Start from '@main/Start/Start'
+import StaticResources from '@main/StaticResources/staticResources'
 
 function createWindow(): void {
   // Create the browser window.
@@ -74,6 +75,7 @@ app.on('window-all-closed', () => {
   }
 })
 
+new StaticResources()
 // 抛出所有方法
 ipcMain.handle('start-function', (_event /* 占位符，暂时不使用 */, methodName:string, ...args) => {
   const method = Start[methodName];
